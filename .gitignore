@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+node_modules/
+.next/
+dist/
+build/
+.DS_Store
+.coverage
+coverage/
+.pytest_cache/
+
+._*
+.AppleDouble
+.LSOverride
