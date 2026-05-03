@@ -12,7 +12,7 @@
 
 Работа всегда идет по цепочке:
 
-tz → PRD → TASKS → выполнение → CHANGELOG
+`tz.md` → `_documents/PRD.md` → `_documents/TASKS.md` → выполнение → `_documents/CHANGELOG.md`
 
 ---
 
@@ -20,10 +20,10 @@ tz → PRD → TASKS → выполнение → CHANGELOG
 
 1. Прочитать:
    - tz.md (если есть)
-   - PRD.md
-   - TASKS.md
-   - Tests.md
-   - CHANGELOG.md
+   - _documents/PRD.md
+   - _documents/TASKS.md
+   - _documents/Tests.md
+   - _documents/CHANGELOG.md
 
 2. Определить:
    - цель
@@ -39,10 +39,10 @@ tz → PRD → TASKS → выполнение → CHANGELOG
 
 ## Шаг 2. Планирование
 
-1. Обновить PRD.md, если вход расширяет контекст  
+1. Обновить `_documents/PRD.md`, если вход расширяет контекст  
    (НЕ придумывать новый продукт)
 
-2. Сформировать TASKS.md
+2. Сформировать `_documents/TASKS.md`
 
 ---
 
@@ -69,7 +69,7 @@ tz → PRD → TASKS → выполнение → CHANGELOG
 
 ## Шаг 3. Обновление тестов
 
-Обновить Tests.md:
+Обновить `_documents/Tests.md`:
 
 - добавить сценарии проверки
 - сгруппировать логически
@@ -93,13 +93,24 @@ tz → PRD → TASKS → выполнение → CHANGELOG
 
 После выполнения:
 
-1. Обновить CHANGELOG.md:
+1. Обновить `_documents/CHANGELOG.md`:
 
 формат:
 - дата
 - короткое описание
 
-2. Обновить Tests.md при изменении поведения
+2. Обновить `_documents/Tests.md` при изменении поведения
+
+---
+
+## Структурные ограничения
+
+- Рабочие документы хранятся только в `_documents/`
+- В корне разрешен только входной `tz.md`
+- Не создавать в корне `PRD.md`, `TASKS.md`, `Tests.md`, `CHANGELOG.md`, `AGENT_SKILL.md`
+- Если такие файлы уже есть в корне, остановиться и предложить перенос в `_documents/`
+- Docker Compose хранится только в `infra/docker/docker-compose.yml`
+- Не создавать корневой `docker-compose.yml` без отдельной явной задачи
 
 ---
 
@@ -120,7 +131,7 @@ tz → PRD → TASKS → выполнение → CHANGELOG
 
 НЕЛЬЗЯ:
 
-- писать код вне TASKS.md
+- писать код вне `_documents/TASKS.md`
 - менять продуктовую логику без входа
 - трогать несвязанные части
 - делать "улучшения без задачи"
@@ -134,7 +145,7 @@ tz → PRD → TASKS → выполнение → CHANGELOG
 - неясен результат
 - нет acceptance criteria
 - задача слишком большая
-- конфликт с PRD.md
+- конфликт с `_documents/PRD.md`
 - нужны секреты или доступы
 
 ---
@@ -145,8 +156,8 @@ tz → PRD → TASKS → выполнение → CHANGELOG
 
 - выполнены acceptance criteria
 - статус обновлен
-- обновлен CHANGELOG.md
-- обновлен Tests.md
+- обновлен `_documents/CHANGELOG.md`
+- обновлен `_documents/Tests.md`
 - проверки выполнены или указана причина
 
 ---
@@ -155,5 +166,5 @@ tz → PRD → TASKS → выполнение → CHANGELOG
 
 Если все задачи выполнены:
 
-- TASKS.md очищается
+- `_documents/TASKS.md` очищается
 - система возвращается в ожидание нового tz.md

@@ -71,9 +71,9 @@ make up
 Агент:
 
 - задаст уточняющие вопросы  
-- обновит PRD.md  
-- создаст TASKS.md  
-- дополнит Tests.md  
+- обновит `_documents/PRD.md`  
+- создаст `_documents/TASKS.md`  
+- дополнит `_documents/Tests.md`  
 
 ---
 
@@ -82,7 +82,7 @@ make up
 Сказать агенту:
 
 ```text
-Выполни следующие задачи из TASKS.md.
+Выполни следующие задачи из _documents/TASKS.md.
 ```
 Агент:
 
@@ -97,9 +97,9 @@ make up
 
 После каждой итерации:
 
-- TASKS.md — текущее состояние работы  
-- CHANGELOG.md — что изменилось  
-- Tests.md — ожидаемое поведение  
+- `_documents/TASKS.md` — текущее состояние работы  
+- `_documents/CHANGELOG.md` — что изменилось  
+- `_documents/Tests.md` — ожидаемое поведение  
 
 ---
 
@@ -107,7 +107,7 @@ make up
 
 Когда задачи закончены:
 
-- TASKS.md очищается  
+- `_documents/TASKS.md` очищается  
 - система готова к следующему входу  
 
 ---
@@ -119,15 +119,15 @@ tz.md (вход)
   ↓
 уточнения
   ↓
-PRD.md (контекст)
+_documents/PRD.md (контекст)
   ↓
-TASKS.md (план)
+_documents/TASKS.md (план)
   ↓
 выполнение малыми батчами
   ↓
-CHANGELOG.md + Tests.md
+_documents/CHANGELOG.md + _documents/Tests.md
   ↓
-очистка TASKS.md → новый цикл
+очистка _documents/TASKS.md → новый цикл
 ```
 
 ---
@@ -138,14 +138,18 @@ CHANGELOG.md + Tests.md
 - _documents/AGENT_SKILL.md — процесс выполнения  
 
 - tz.md — текущая задача  
-- PRD.md — продуктовый контекст  
-- TASKS.md — текущие задачи  
-- Tests.md — сценарии проверки  
-- CHANGELOG.md — история изменений  
+- _documents/PRD.md — продуктовый контекст  
+- _documents/TASKS.md — текущие задачи  
+- _documents/Tests.md — сценарии проверки  
+- _documents/CHANGELOG.md — история изменений  
 
 - backend/ — место под API  
 - frontend/ — место под UI  
 - infra/ — базовая инфраструктура  
+- infra/docker/docker-compose.yml — единственный Docker Compose файл шаблона
+
+Рабочие документы `PRD.md`, `TASKS.md`, `Tests.md`, `CHANGELOG.md`, `AGENT_SKILL.md` в корне создавать не нужно.
+Корневой `docker-compose.yml` не используется: запуск идет через `make up` или `docker compose -f infra/docker/docker-compose.yml up -d`.
 
 ---
 
@@ -153,7 +157,7 @@ CHANGELOG.md + Tests.md
 
 ### 1. Источник истины — задачи
 
-Агент не пишет код вне TASKS.md.
+Агент не пишет код вне `_documents/TASKS.md`.
 
 ---
 
@@ -169,14 +173,14 @@ CHANGELOG.md + Tests.md
 
 Любое изменение должно быть отражено в:
 
-- TASKS.md  
-- CHANGELOG.md  
+- `_documents/TASKS.md`  
+- `_documents/CHANGELOG.md`  
 
 ---
 
 ### 4. Контекст не придумывается
 
-Агент может обновлять PRD.md,  
+Агент может обновлять `_documents/PRD.md`,  
 но не должен придумывать продуктовую логику.
 
 ---
