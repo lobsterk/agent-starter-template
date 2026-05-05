@@ -75,6 +75,14 @@
 
 ---
 
+## Frontend stack
+
+- Референсный frontend-стек: Next.js, React, TypeScript, Tailwind CSS, Playwright
+- Frontend-приложение не создавать без отдельной задачи в `_documents/TASKS.md`
+- Если задача требует UI, использовать этот стек как базовый по умолчанию
+
+---
+
 ## Изменения вне задачи
 
 Разрешены только для:

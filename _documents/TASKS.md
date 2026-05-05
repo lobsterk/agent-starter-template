@@ -35,10 +35,27 @@ Notes:
 
 ## Current Cycle
 
-Статус: ожидание нового входа.
+Статус: обновление описания frontend-стека.
 
-Источник: `tz.md` или прямая задача пользователя.
+Источник: прямая задача пользователя.
 
 ## Tasks
 
-Нет активных задач.
+### TASK-001: Зафиксировать полный frontend-стек в промптах
+
+Status: Done
+Area: docs | frontend | agent
+
+Description:
+Обновить описание frontend-стека в агентских промптах и frontend-документации шаблона.
+
+Acceptance Criteria:
+- [x] В промптах указан полный frontend-стек: Next.js, React, TypeScript, Tailwind CSS, Playwright.
+- [x] Уточнено, что приложение пока не сгенерировано.
+- [x] Изменения не создают frontend-код вне отдельной задачи.
+
+Test Scenarios:
+- Проверить поиском, что новый frontend-стек зафиксирован в документах.
+
+Notes:
+- За основу взят стек из `/Users/danil/Projects/gitlab.com/after-lesson`.
