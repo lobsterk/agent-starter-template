@@ -13,7 +13,7 @@ test-ui:
 	@echo "UI tests are not configured yet"
 
 agent-plan:
-	@echo "Codex prompt: прочитай tz.md, AGENTS.md и _documents/AGENT_SKILL.md; при UI-задачах используй frontend-стек Next.js + React + TypeScript + Tailwind CSS + Playwright; обнови _documents/PRD.md, _documents/TASKS.md и _documents/Tests.md"
+	@echo "Codex prompt: read AGENTS.md, AGENT_SKILLS.md, relevant agent-skills/*.md, and relevant discovery, PRD, EPIC, and active TZ documents; help with discovery, PRD refinement, EPIC decomposition, estimation, or TZ planning depending on the current project phase"
 
 agent-run:
-	@echo "Codex prompt: прочитай AGENTS.md и _documents/AGENT_SKILL.md; при UI-задачах используй frontend-стек Next.js + React + TypeScript + Tailwind CSS + Playwright; выполни следующие 1-3 Ready задачи из _documents/TASKS.md"
+	@echo "Codex prompt: read AGENTS.md, AGENT_SKILLS.md, relevant agent-skills/*.md, current PRD/EPIC context, and the next Ready TZ from _documents/TASKS.md; implement only that TZ, then update _documents/TESTS.md and _documents/CHANGELOG.md"

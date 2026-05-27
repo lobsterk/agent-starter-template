@@ -1,156 +1,90 @@
 # AGENTS.md
 
-## Базовый контракт
+# TEMPLATE MAINTENANCE MODE
 
-- Общаться только на русском
-- Писать кратко и по делу
-- Не придумывать продукт за пользователя
-- Работать только через `_documents/TASKS.md`
+This repository is a TEMPLATE FRAMEWORK repository.
 
----
+Production workflow rules described in this repository
+MUST NOT be automatically executed inside this template repository itself.
 
-## Документы
+Do NOT:
+- automatically create TZ documents;
+- automatically generate TASKS lifecycle;
+- automatically update CHANGELOG for every discussion;
+- automatically generate TESTS updates;
+- simulate production workflow execution.
 
-- tz.md — вход
-- _documents/PRD.md — продуктовый контекст
-- _documents/TASKS.md — текущие задачи (источник истины)
-- _documents/CHANGELOG.md — история
-- _documents/Tests.md — сценарии проверки
-- _documents/AGENT_SKILL.md — процесс работы агента
+These rules exist for repositories created from this template.
 
-Рабочие документы `PRD.md`, `TASKS.md`, `CHANGELOG.md`, `Tests.md`, `AGENT_SKILL.md` в корне создавать нельзя.
-Если такие файлы уже есть в корне — считать это ошибкой структуры и остановиться либо предложить перенос в `_documents/`.
+IMPORTANT:
+Remove this section when initializing a real production project.
 
-`tz.md` — единственный рабочий md-документ, который остается в корне как вход.
+## Contract
 
----
+- Follow the documented workflow.
+- Keep answers concise and practical.
+- Do not invent product scope for the user.
 
-## Рабочий цикл
+## Read First
 
-1. Прочитать `tz.md` и документы из `_documents/`
-2. Обновить `_documents/PRD.md` (если нужно, без выдумки)
-3. Сформировать `_documents/TASKS.md`
-4. Обновить `_documents/Tests.md`
-5. Выполнять задачи
+- `AGENT_SKILLS.md`
+- `agent-skills/workflow.md`
+- `agent-skills/documentation.md`
+- `agent-skills/testing.md`
 
----
+## Workflow
 
-## _documents/TASKS.md
+```text
+Discovery -> PRD -> EPIC -> TZ -> Implementation -> TESTS -> CHANGELOG
+```
 
-Каждая задача:
-
-- id
-- статус: Ready / In Progress / Done / Blocked
-- описание
-- acceptance criteria (1–3 пункта)
-- способ проверки
-
----
-
-## Ограничения на задачи
-
-- 1 задача = одна логическая операция
-- максимум 3–5 файлов
-- брать 1–3 задачи за раз
-- если больше — разбить
-
----
-
-## Выполнение
-
-1. взять задачи Ready
-2. перевести в In Progress
-3. реализовать
-4. выполнить минимальные проверки
-5. перевести в Done
-6. обновить `_documents/CHANGELOG.md` и `_documents/Tests.md`
-
----
-
-## Инфраструктура
-
-- Docker Compose хранится только в `infra/docker/docker-compose.yml`
-- Корневой `docker-compose.yml` создавать нельзя без отдельной явной задачи
-- Запуск выполнять через `make up` или `docker compose -f infra/docker/docker-compose.yml up -d`
-
----
-
-## Frontend stack
-
-- Референсный frontend-стек: Next.js, React, TypeScript, Tailwind CSS, Playwright
-- Frontend-приложение не создавать без отдельной задачи в `_documents/TASKS.md`
-- Если задача требует UI, использовать этот стек как базовый по умолчанию
-
----
-
-## Изменения вне задачи
-
-Разрешены только для:
-
-- сборки
-- тестов
-- интеграции
-- устранения явной поломки
-
-Обязательно краткое объяснение.
-
----
+Use `_documents/TASKS.md` only as the active board in real projects created from this template.
 
 ## Definition of Done
 
-- выполнены acceptance criteria
-- статус обновлен
-- обновлен `_documents/CHANGELOG.md`
-- обновлен `_documents/Tests.md`
-- проверки выполнены или причина указана
+- Acceptance criteria met.
+- Relevant docs updated.
+- Relevant checks run or skipped with reason.
+- Completed TZ moved to `_documents/tasks-done/` in real projects.
 
----
+## Boundaries
 
-## Ограничения
+Template-level docs must stay domain-agnostic.
 
-НЕЛЬЗЯ:
+Do not store project-specific business logic, roles, RBAC matrices, or product workflows in this template.
 
-- писать код вне `_documents/TASKS.md`
-- менять продукт без входа
-- трогать несвязанные части
-- делать “улучшения без задачи”
-- создавать рабочие md-документы в корне, кроме `tz.md`
-- создавать `docker-compose.yml` в корне без отдельной явной задачи
+## Language Policy
 
----
+System/workflow documentation must use English:
+- `AGENTS.md`
+- `AGENT_SKILLS.md`
+- `agent-skills/*`
+- workflow/system terminology
+- AI-agent rules
+- repository structure
+- template maintenance rules
 
-## PRD
+Product/project documentation should use Russian:
+- PRD
+- TASKS
+- TESTS
+- CHANGELOG
+- Discovery
+- EPIC
+- TZ
+- business requirements
+- acceptance criteria
+- project README content
 
-- `_documents/PRD.md` можно обновлять, но не придумывать
-- если конфликт — остановиться
+Avoid mixing Russian and English inside the same sentence or paragraph unless necessary.
 
----
-
-## Когда остановиться
-
-- неясен результат
-- нет acceptance criteria
-- задача слишком большая
-- конфликт с PRD
-- нужны секреты или доступы
-
----
-
-## Ответ
-
-После итерации:
-
-1. что сделано
-2. какие файлы изменены
-3. какие проверки выполнены
-4. что осталось
-5. статус `_documents/TASKS.md`
-
-## Skills (обязательно)
-
-Перед планированием и выполнением агент обязан:
-1. Прочитать _documents/AGENT_SKILL.md
-2. Следовать описанному процессу
-3. Не изобретать собственный workflow
-   
-Если подходящий skill есть — НЕ изобретать новый процесс.
+Stable workflow terms may remain in English:
+- PRD
+- EPIC
+- TZ
+- Discovery
+- Scope
+- Acceptance Criteria
+- Definition of Done
+- Changelog
+- Workflow

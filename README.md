@@ -1,238 +1,104 @@
 # agent-starter-template
 
-Шаблон для разработки, в котором AI-агент (Codex или аналог) отвечает не только за написание кода, но и за планирование, выполнение и фиксацию состояния проекта.
+Lightweight bootstrap template for AI-assisted development.
 
-Цель — не просто ускорить разработку, а сделать её предсказуемой, управляемой и воспроизводимой при работе с AI.
+It defines a small documentation workflow and leaves product decisions to the project created from it.
 
----
+## Bootstrap New Project
 
-## Зачем это нужно
+After cloning this template into a real project repository,
+open `BOOTSTRAP_PROMPT.md`
+and execute that prompt with your AI coding agent
+(Codex, Claude Code, Cursor Agent, etc.).
 
-Типичный процесс с AI быстро ломается:
+The bootstrap prompt will:
+- disable template maintenance mode;
+- clean skeleton documents;
+- prepare the repository for real project workflow;
+- preserve workflow rules and repository structure.
 
-- непонятно, что уже сделано  
-- нет точки остановки  
-- изменения не фиксируются  
-- агент чинит одно и ломает другое  
+## Language Policy
 
-Этот шаблон вводит простой и строгий процесс:
+This template separates language by documentation layer:
 
-вход → план → задачи → выполнение → журнал изменений
+- System/workflow documentation is written in English.
+- Product/project documentation may be written in Russian.
 
-Это позволяет:
+Use English for agent rules and workflow mechanics.
+Use Russian for product requirements, business logic, tasks, and project documentation when it improves readability.
 
-- останавливать и продолжать работу в любой момент  
-- контролировать поведение агента  
-- видеть все изменения  
-- сохранять продуктовый контекст  
+Before starting a real project, keep this policy unless the team decides otherwise.
 
----
+## Structure
 
-## Основная идея
+```text
+/
+  README.md
+  AGENTS.md
+  AGENT_SKILLS.md
 
-Агент — это не просто генератор кода.
+  agent-skills/
+    workflow.md
+    documentation.md
+    testing.md
 
-Агент:
+  _documents/
+    PRD.md
+    TASKS.md
+    TESTS.md
+    CHANGELOG.md
+    discovery/
+    epics/
+    tz/
+    tasks-done/
 
-1. понимает задачу  
-2. формирует план  
-3. разбивает на задачи  
-4. выполняет задачи небольшими партиями  
-5. обновляет состояние системы (задачи, тесты, изменения)  
+  backend/
+  frontend/
+  infra/
+```
 
----
+`backend/`, `frontend/`, and `infra/` are optional bootstrap folders. They do not mean the app has already been generated.
 
-## Быстрый старт
+## Workflow
+
+```text
+Discovery -> PRD -> EPIC -> TZ -> Implementation -> TESTS -> CHANGELOG
+```
+
+- Discovery is exploratory and mutable.
+- PRD stores product truth.
+- EPIC groups larger outcomes.
+- TZ is a small vertical slice with acceptance criteria.
+- TASKS is the active board for the current TZ.
+- TESTS describes verification scenarios.
+- CHANGELOG records concise completed changes.
+
+## TZ Rule
+
+Prefer vertical slices.
+
+Bad:
+
+- backend auth
+- frontend auth
+- database auth
+
+Good:
+
+- user can login via email
+
+## Commands
 
 ```sh
 make init
 make up
 ```
 
----
+Docker Compose lives at `infra/docker/docker-compose.yml`.
 
-## Как работать
+## Not Included
 
-### Шаг 1 — задать задачу
-
-Положить большую задачу в tz.md  
-или написать её агенту напрямую.
-
----
-
-### Шаг 2 — планирование
-
-Сказать агенту:
-
-```text
-Прочитай tz.md и распланируй задачи.
-```
-
-Агент:
-
-- задаст уточняющие вопросы  
-- обновит `_documents/PRD.md`  
-- создаст `_documents/TASKS.md`  
-- дополнит `_documents/Tests.md`  
-
----
-
-### Шаг 3 — выполнение
-
-Сказать агенту:
-
-```text
-Выполни следующие задачи из _documents/TASKS.md.
-```
-Агент:
-
-- возьмёт 1–3 связанные задачи  
-- реализует их  
-- выполнит минимальные проверки  
-- обновит документы  
-
----
-
-### Шаг 4 — контроль состояния
-
-После каждой итерации:
-
-- `_documents/TASKS.md` — текущее состояние работы  
-- `_documents/CHANGELOG.md` — что изменилось  
-- `_documents/Tests.md` — ожидаемое поведение  
-
----
-
-### Шаг 5 — завершение цикла
-
-Когда задачи закончены:
-
-- `_documents/TASKS.md` очищается  
-- система готова к следующему входу  
-
----
-
-## Workflow
-
-```text
-tz.md (вход)
-  ↓
-уточнения
-  ↓
-_documents/PRD.md (контекст)
-  ↓
-_documents/TASKS.md (план)
-  ↓
-выполнение малыми батчами
-  ↓
-_documents/CHANGELOG.md + _documents/Tests.md
-  ↓
-очистка _documents/TASKS.md → новый цикл
-```
-
----
-
-## Структура проекта
-
-- AGENTS.md — правила поведения агента  
-- _documents/AGENT_SKILL.md — процесс выполнения  
-
-- tz.md — текущая задача  
-- _documents/PRD.md — продуктовый контекст  
-- _documents/TASKS.md — текущие задачи  
-- _documents/Tests.md — сценарии проверки  
-- _documents/CHANGELOG.md — история изменений  
-
-- backend/ — место под API  
-- frontend/ — место под UI  
-- infra/ — базовая инфраструктура  
-- infra/docker/docker-compose.yml — единственный Docker Compose файл шаблона
-
-Рабочие документы `PRD.md`, `TASKS.md`, `Tests.md`, `CHANGELOG.md`, `AGENT_SKILL.md` в корне создавать не нужно.
-Корневой `docker-compose.yml` не используется: запуск идет через `make up` или `docker compose -f infra/docker/docker-compose.yml up -d`.
-
----
-
-## Основные принципы
-
-### 1. Источник истины — задачи
-
-Агент не пишет код вне `_documents/TASKS.md`.
-
----
-
-### 2. Малые итерации
-
-- 1–3 задачи за раз  
-- меньше риска  
-- проще проверять  
-
----
-
-### 3. Нет скрытых изменений
-
-Любое изменение должно быть отражено в:
-
-- `_documents/TASKS.md`  
-- `_documents/CHANGELOG.md`  
-
----
-
-### 4. Контекст не придумывается
-
-Агент может обновлять `_documents/PRD.md`,  
-но не должен придумывать продуктовую логику.
-
----
-
-### 5. Тесты как сценарии
-
-Тесты — это:
-
-- не обязательно код  
-- но всегда описание поведения  
-
----
-
-## Команды (логические режимы)
-
-agent-plan и agent-run — не реальные команды.
-
-Это режимы работы:
-
-- agent-plan → анализ и планирование  
-- agent-run → выполнение задач  
-
----
-
-## Новый цикл
-
-Чтобы начать новую задачу:
-
-- заменить tz.md  
-или  
-- дать задачу напрямую агенту  
-
----
-
-## Что это НЕ является
-
-- не boilerplate  
-- не генератор кода  
-- не фреймворк  
-
-Это шаблон процесса разработки.
-
----
-
-## Для кого это
-
-- разработчики, работающие с AI-агентами  
-- техлиды, исследующие agent-driven подход  
-- команды, которым важна предсказуемость разработки  
-
----
-
-## Статус
-
-Template. Без прикладного кода.
+- Product-specific business rules.
+- Concrete RBAC model.
+- Generated backend/frontend app.
+- Enterprise governance system.
